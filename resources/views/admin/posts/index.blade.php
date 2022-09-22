@@ -21,17 +21,22 @@
                         <tr>
                             <th scope="row">{{ $post->id }}</th>
                             <td>{{ $post->user->name }}</td>
-                            <td>{{ $post->category->name }}</td>
-                            <td>{{ $post->title }}</td>
                             <td>
-                                <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-sm btn-success">
+                                <span style="
+                                border: 8px solid {{ $post->category->color }};
+                                border-radius: 5px;
+                                    " class="px-2 py-1">{{ $post->category->name }}</span>
+                            </td>
+                            <td>{{ $post->title }}</td>
+                            <td class="d-inline">
+                                <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-sm btn-success d-inline p-2">
                                     View
                                 </a>
-                                <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-sm btn-success d-inline p-2">
                                     Edit
                                 </a>
 
-                                <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
+                                <form class="d-inline p-1" action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" value="delete">
