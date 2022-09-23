@@ -37,7 +37,7 @@
 
                             </td>
                             <td>{{ $post->title }}</td>
-                            <td class="d-inline">
+                            <td>
                                 <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-sm btn-success d-inline p-2">
                                     View
                                 </a>
