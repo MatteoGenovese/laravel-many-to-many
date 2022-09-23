@@ -31,6 +31,14 @@
             </form>
 
         </div>
+        <div class="col-4">
+            @forelse ($post->tags as $tag)
+                {{ '#'.$tag->name." " }}
+            @empty
+
+            @endforelse
+
+        </div>
     </div>
 </div>
 
