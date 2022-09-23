@@ -12,6 +12,7 @@
                         <th scope="col">id</th>
                         <th scope="col">Author</th>
                         <th scope="col">Category</th>
+                        <th scope="col">Tags</th>
                         <th scope="col">Title</th>
                         <th scope="col"></th>
                     </tr>
@@ -26,6 +27,14 @@
                                 border: 8px solid {{ $post->category->color }};
                                 border-radius: 5px;
                                     " class="px-2 py-1">{{ $post->category->name }}</span>
+                            </td>
+                            <td>
+                                @forelse ($post->tags as $tag)
+                                    {{ $tag->name}}
+                                @empty
+                                    {{ '-' }}
+                                @endforelse
+
                             </td>
                             <td>{{ $post->title }}</td>
                             <td class="d-inline">
