@@ -34,7 +34,7 @@
                                 </div>
                                 </td>
                             <td>{{ $category->title }}</td>
-                            <td class="d-inline">
+                            <td>
                                 <a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-sm btn-success d-inline p-2">
                                     View
                                 </a>
