@@ -21,4 +21,20 @@ $newDate = explode(' ', $post->post_date);
     <label for="post_content">post content</label>
     <input type="text" class="form-control" id="post_content"  placeholder="Enter the post content" name="post_content" value="{{ old('post_content', $post->post_content) }}">
 </div>
+
+<div class="form-group">
+    <label for="post_tag">tags</label>
+    <div class="row">
+        @forelse ($post->tags as $tag)
+            <div class="col-3">
+                <input type="text" class="form-control" id="name"  placeholder="Enter the tag" name="name" value="{{ old('name', $tag->name) }}">
+            </div>
+        @empty
+            <div class="col-3">
+                <input type="text" class="form-control" id="name"  placeholder="Enter the tag" name="name" value="{{ old('name', "") }}">
+            </div>
+        @endforelse
+    </div>
+</div>
+
 <button type="submit" class="btn btn-primary">Submit</button>
