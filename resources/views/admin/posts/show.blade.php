@@ -5,7 +5,6 @@ $date = $post->post_date;
 $newDate = explode(' ', $date);
 @endphp
 
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -28,17 +27,7 @@ $newDate = explode(' ', $date);
                 <div class="col">{{ $newDate[0] }}</div>
                 <div class="col">
                         @forelse ($tags as $tag)
-                            @if ($errors->any())
-                                <input name="tags[]" class="form-check-input" type="checkbox" id="input-tags" value="{{ $tag->id }}"
-                                {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
-                            @else
-                                <input name="tags[]" class="form-check-input" type="checkbox" id="input-tags" value="{{ $tag->id }}"
-                                {{ $post->tags->contains($tag) ? 'checked' : '' }}>
-                            @endif
-                            <label for="input-tags" class="form-check-label">
-                                {{ $tag->name }}
-                            </label>
-                            <br>
+                            {{ '#'.$tag->name }} <br>
                         @empty
                             {{ 'No tags..' }}
                         @endforelse

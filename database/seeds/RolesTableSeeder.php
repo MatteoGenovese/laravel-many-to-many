@@ -1,6 +1,6 @@
 <?php
 
-use App\Admin\Role;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 use Faker\Generator as Faker;

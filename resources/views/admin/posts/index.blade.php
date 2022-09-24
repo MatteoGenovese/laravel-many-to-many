@@ -4,6 +4,9 @@
 
 
 <div class="container">
+
+    <a href="{{ route('admin.posts.create') }}" class="btn btn-dark mb-2">Create new</a>
+
     <div class="row">
         <div class="col-12">
             <table class="table">

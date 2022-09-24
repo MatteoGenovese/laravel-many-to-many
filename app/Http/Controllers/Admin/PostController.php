@@ -35,7 +35,8 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-        return view('admin.posts.create', compact('post'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('post','tags'));
     }
 
     /**
@@ -62,7 +63,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        $tags = Tag::all();
+        $tags = $post->tags;
         return view('admin.posts.show', compact('post', 'tags'));
     }
 
@@ -75,7 +76,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post','tags'));
     }
 
     /**
@@ -91,6 +93,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $sentData['post_image'] = $faker->imageUrl();
         $post->update($sentData);
+        $post->tags()->sync($sentData['tags']);
         return redirect()->route('admin.posts.index',compact('post'));
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Admin\Role;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -20,24 +20,11 @@ class RolesUserTableSeeder extends Seeder
 
         foreach ($users as $user) {
 
-            //$randomRole = $faker->randomElement($roles);
-            // $randomRoleId = Role::inRandomOrder()->first()->id;
-
-            // $randomRoleId = [
-            //     $faker->randomElement($roles)->id,
-            //     $faker->randomElement($roles)->id,
-            //     $faker->randomElement($roles)->id,
-            // ];
-
             $randomRoles = $faker->randomElements( $roles, 2, false );
-
             foreach ($randomRoles as $randomRole) {
-
-                $user->roles()->sync($randomRole->id);
+                $user->roles()->attach($randomRole->id);
             }
+
         }
-
-
-
     }
 }

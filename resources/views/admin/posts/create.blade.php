@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+
+
 @section('content')
 
 
@@ -10,7 +12,7 @@
 
                 @csrf
                 @method('POST')
-                @include('includes.form')
+                @include('admin.posts.includes.form')
 
             </form>
         </div>
