@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -48,8 +49,9 @@ class PostController extends Controller
     public function store(Request $request, Faker $faker)
     {
         $sentData = $request->all();
+        $sentData['post_image']= Storage::put('images', $sentData['post_image']);
+        // dd($sentData);
         $post = new Post();
-        $sentData['post_image'] = $faker->imageUrl();
         $post->create($sentData);
         return redirect()->route('admin.posts.index',compact('post'));
     }
@@ -90,6 +92,8 @@ class PostController extends Controller
     public function update(Request $request, $id, Faker $faker)
     {
         $sentData = $request->all();
+
+        dd($sentData);
         $post = Post::findOrFail($id);
         $sentData['post_image'] = $faker->imageUrl();
         $post->update($sentData);
