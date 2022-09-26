@@ -18,6 +18,11 @@ $newDate = explode(' ', $post->post_date);
 </div>
 
 <div class="form-group">
+    <label for="post_image">post image</label>
+    <input type="file" class="form-control" id="post_image"  placeholder="Enter the post content" name="post_image" value="{{ old('post_image', $post->post_image) }}">
+</div>
+
+<div class="form-group">
     <label for="post_tag">tags</label>
     <div class="row">
 
