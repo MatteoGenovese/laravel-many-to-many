@@ -12,6 +12,7 @@ $newDate = explode(' ', $date);
         <div class="col-6">
             <div class="row">
                 <div class="col-12"><img src="{{ $post->post_image }}" class="w-100" alt="{{ $post->title }} image"></div>
+                <img src="{{ asset('images/'.$post->cover_image) }}">
                 <div class="col-12">{{ $post->title }}</div>
             </div>
         </div>
