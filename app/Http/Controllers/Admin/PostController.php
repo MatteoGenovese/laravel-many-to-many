@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use Faker\Generator as Faker;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -37,7 +37,8 @@ class PostController extends Controller
     {
         $post = new Post();
         $tags = Tag::all();
-        return view('admin.posts.create', compact('post','tags'));
+        $categories = Category::all();
+        return view('admin.posts.create', compact('post','tags','categories'));
     }
 
     /**
@@ -49,11 +50,17 @@ class PostController extends Controller
     public function store(Request $request, Faker $faker)
     {
         $sentData = $request->all();
+        $sentData['user_id']= Auth::id();
         $sentData['post_image']= Storage::put('images', $sentData['post_image']);
-        // dd($sentData);
-        $post = new Post();
-        $post->create($sentData);
-        return redirect()->route('admin.posts.index',compact('post'));
+
+        $newPost=new Post();
+        $newPost->fill($sentData);
+        $newPost->save();
+
+        $newPost->tags()->sync($sentData['tags']);
+
+        return redirect()->route('admin.posts.index');
+
     }
 
     /**
@@ -79,7 +86,8 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $tags = Tag::all();
-        return view('admin.posts.edit', compact('post','tags'));
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post','tags','categories'));
     }
 
     /**
@@ -89,16 +97,28 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, Faker $faker)
+    public function update(Request $request, $id)
     {
         $sentData = $request->all();
-
-        dd($sentData);
+        $sentData['user_id']= Auth::id();
+        $sentData['post_image']= Storage::put('images', $sentData['post_image']);
         $post = Post::findOrFail($id);
-        $sentData['post_image'] = $faker->imageUrl();
-        $post->update($sentData);
+
+        $post->fill($sentData);
+        $post->save();
+
         $post->tags()->sync($sentData['tags']);
         return redirect()->route('admin.posts.index',compact('post'));
+
+
+
+
+
+
+        // $newPost->fill($sentData);
+        // $newPost->save();
+
+
     }
 
     /**
