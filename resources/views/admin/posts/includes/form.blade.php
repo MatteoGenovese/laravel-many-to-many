@@ -3,6 +3,25 @@
     <input type="text" class="form-control" id="title"  placeholder="Enter title" name="title" value="{{ old('title', $post->title) }}">
 </div>
 
+<div class="form-group">
+    <label for="category">category</label>
+    <select class="form-control" id="input-category" name="category_id">
+
+        <option value="">No category</option>
+        @foreach ($categories as $category)
+            <option value="{{ old('category', $category->id) }}"
+                @isset($post->category)
+                    {{ $category->id  ===  $post->category->id ? 'select' : ''}}
+                @endisset
+                >
+            {{ $category->name }}
+            </option>
+        @endforeach
+
+    </select>
+
+</div>
+
 @php
 $newDate = explode(' ', $post->post_date);
 @endphp
@@ -16,6 +35,8 @@ $newDate = explode(' ', $post->post_date);
     <label for="post_content">post content</label>
     <input type="text" class="form-control" id="post_content"  placeholder="Enter the post content" name="post_content" value="{{ old('post_content', $post->post_content) }}">
 </div>
+
+
 
 <div class="form-group">
     <label for="post_image">post image</label>
